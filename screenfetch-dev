@@ -285,6 +285,7 @@ getColor () {
 			# Some 256 colors
 			'orange')					color_ret="$(colorize '202')";; #DarkOrange
 			'light orange') 			color_ret="$(colorize '214')";; #Orange1
+			'portal orange') 			color_ret="$(colorize '136')";;
 			# HaikuOS
 			'black_haiku') 				color_ret="$(colorize '7')";;
 			#ROSA color
@@ -5600,17 +5601,16 @@ asciiText () {
 "                         %s")
 		;;
 
-		*)
-			if [[ "${kernel}" =~ "Linux" ]]; then
-				if [[ "$no_color" != "1" ]]; then
-					c1=$(getColor 'white') # White
-					c2=$(getColor 'dark grey') # Light Gray
-					c3=$(getColor 'yellow') # Light Yellow
-				fi
-				if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; fi
-				startline="0"
-				logowidth="28"
-				fulloutput=(
+		"Linux")
+		if [[ "$no_color" != "1" ]]; then
+			c1=$(getColor 'white') # White
+			c2=$(getColor 'dark grey') # Light Gray
+			c3=$(getColor 'yellow') # Light Yellow
+		fi
+		if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; fi
+		startline="0"
+		logowidth="28"
+		fulloutput=(
 "${c2}                            %s"
 "${c2}                            %s"
 "${c2}                            %s"
@@ -5629,15 +5629,16 @@ asciiText () {
 "${c2}                            %s"
 "${c2}                            %s"
 "${c2}                            %s")
+		;;
 
-			elif [[ "${kernel}" =~ "Hurd" || "${kernel}" =~ "GNU" || "${OSTYPE}" == "gnu" ]]; then
-				if [[ "$no_color" != "1" ]]; then
-					c1=$(getColor 'dark grey') # Light Gray
-				fi
-				if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
-				startline="0"
-				logowidth="37"
-				fulloutput=(
+		"Hurd"|"GNU"|"gnu")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'dark grey') # Light Gray
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			logowidth="37"
+			fulloutput=(
 "${c1}    _-\`\`\`\`\`-,           ,- '- .      %s"
 "${c1}   .'   .- - |          | - -.  \`.   %s"
 "${c1}  /.'  /                     \`.   \\  %s"
@@ -5662,15 +5663,16 @@ asciiText () {
 # terms of the GNU General Public License as published by the Free Software
 # Foundation; either version 2 of the License, or (at your option) any later
 # version.
+		;;
 
-			else
-				if [[ "$no_color" != "1" ]]; then
-					c1=$(getColor 'light green') # Light Green
-				fi
-				if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
-				startline="0"
-				logowidth="44"
-				fulloutput=(
+		"Unix")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'light green') # Light Green
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			logowidth="44"
+			fulloutput=(
 "${c1}                                            %s"
 "${c1}                                            %s"
 "${c1} UUU     UUU NNN      NNN IIIII XXX     XXXX%s"
@@ -5686,8 +5688,97 @@ asciiText () {
 "${c1}                                            %s"
 "${c1}                                            %s"
 "${c1}                                            %s")
-			fi
 		;;
+
+		"Aperture"|"Aperture Science")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'portal orange')
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c1}                                              %s"
+"${c1}              .,-:;//;:=,                     %s "
+"${c1}          . :H@@@MM@M#H/.,+%%;,                %s" 
+"${c1}       ,/X+ +M@@M@MM%%=,-%%HMMM@X/,             %s"
+"${c1}     -+@MM; \$M@@MH+-,;XMMMM@MMMM@+-           %s" 
+"${c1}    ;@M@@M- XM@X;. -+XXXXXHHH@M@M#@/.         %s"
+"${c1}  ,%%MM@@MH ,@%%=            .---=-=:=,.        %s"
+"${c1}  =@#@@@MX .,              -%%HX\$\$%%%%%%+;        %s"
+"${c1} =-./@M@M\$                  .;@MMMM@MM:       %s"
+"${c1} X@/ -\$MM/                    .+MM@@@M\$       %s"
+"${c1},@M@H: :@:                    . =X#@@@@-      %s" 
+"${c1},@@@MMX, .                    /H- ;@M@M=      %s"
+"${c1}.H@@@@M@+,                    %%MM+..%%#\$.      %s" 
+"${c1} /MMMM@MMH/.                  XM@MH; =;       %s"
+"${c1}  /%%+%%\$XHH@\$=              , .H@@@@MX,        %s"  
+"${c1}   .=--------.           -%%H.,@@@@@MX,        %s"
+"${c1}   .%%MM@@@HHHXX\$\$\$%%+- .:\$MMX =M@@MM%%.         %s" 
+"${c1}     =XMMM@MM@MM#H;,-+HMM@M+ /MMMX=           %s"
+"${c1}       =%%@M@M#@\$-.=\$@MM@@@M; %%M%%=             %s"
+"${c1}         ,:+\$+-,/H#MMMMMMM@= =,               %s"  
+"${c1}               =++%%%%%%%%+/:-.                   %s")
+		;;
+
+		"Mesa"|"Black Mesa")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'portal orange')
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c1}                                              %s"  
+"${c1}           .-;+\$XHHHHHHX\$+;-.                 %s"
+"${c1}        ,;X@@X%%/;=----=:/%%X@@X/               %s"
+"${c1}      =\$@@%%=.              .=+H@X:            %s"
+"${c1}    -XMX:                      =XMX=          %s" 
+"${c1}   /@@:                          =H@+         %s"
+"${c1}  %%@X,                            .\$@\$        %s"     
+"${c1} +@X.                               \$@%%       %s"     
+"${c1}-@@,                                .@@=      %s"   
+"${c1}%%@%%                                  +@\$      %s"   
+"${c1}H@:                                  :@H      %s" 
+"${c1}H@:         :HHHHHHHHHHHHHHHHHHX,    =@H      %s"
+"${c1}%%@%%         ;@M@@@@@@@@@@@@@@@@@H-   +@\$      %s"     
+"${c1}=@@,        :@@@@@@@@@@@@@@@@@@@@@= .@@:      %s"  
+"${c1} +@X        :@@@@@@@@@@@@@@@M@@@@@@:%%@%%       %s" 
+"${c1}  \$@\$,      ;@@@@@@@@@@@@@@@@@M@@@@@@\$.       %s" 
+"${c1}   +@@HHHHHHH@@@@@@@@@@@@@@@@@@@@@@@+         %s"
+"${c1}    =X@@@@@@@@@@@@@@@@@@@@@@@@@@@@X=          %s"
+"${c1}      :\$@@@@@@@@@@@@@@@@@@@M@@@@\$:            %s"
+"${c1}        ,;\$@@@@@@@@@@@@@@@@@@X/-              %s"
+"${c1}           .-;+\$XXHHHHHX\$+;-.                 %s")
+		;;
+
+		"Cake"|"The Cake")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'portal orange')
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c1}                                               %s"  
+"${c1}            ,:/+/-                            %s"
+"${c1}            /M/              .,-=;//;-        %s"
+"${c1}       .:/= ;MH/,    ,=/+%%\$XH@MM#@:           %s"
+"${c1}      -\$##@+\$###@H@MMM#######H:.    -/H       %s"
+"${c1} .,H@H@ X######@ -H#####@+-     -+H###@X      %s"
+"${c1}  .,@##H;      +XM##M/,     =%%@###@X;-        %s"
+"${c1}X%%-  :M##########\$.    .:%%M###@%%:             %s"
+"${c1}M##H,   +H@@@\$/-.  ,;\$M###@%%,          -      %s"
+"${c1}M####M=,,---,.-%%%%H####M\$:          ,+@##      %s"
+"${c1}@##################@/.         :%%H##@\$-       %s"
+"${c1}M###############H,         ;HM##M\$=           %s"
+"${c1}#################.    .=\$M##M\$=               %s"
+"${c1}################H..;XM##M\$=          .:+      %s"
+"${c1}M###################@%%=           =+@MH%%      %s"
+"${c1}@################M/.          =+H#X%%=         %s"
+"${c1}=+M##############M,       -/X#X+;.            %s"
+"${c1}  .;XM##########H=    ,/X#H+:.                %s"
+"${c1}     ,:/%%XM####H/.                            %s"
+"${c1}          ,.:=-.                              %s")
+		;;
+		
 	esac
 
 
@@ -5857,8 +5948,11 @@ infoDisplay () {
 		"CentOS")
 			labelcolor=$(getColor 'yellow')
 		;;
-		"Hyperbola GNU/Linux-libre"|"PureOS"|*)
+		"Hyperbola GNU/Linux-libre"|"PureOS"*)
 			labelcolor=$(getColor 'light grey')
+		;;
+		"Aperture"|"Aperture Science"|"Mesa"|"Black Mesa"|"Cake"|"The Cake"|*)
+			labelcolor=$(getColor 'dark grey')
 		;;
 	esac
 	[[ "$my_lcolor" ]] && labelcolor="${my_lcolor}"
@@ -5877,7 +5971,8 @@ infoDisplay () {
 	#########################
 	# Info Variable Setting #
 	#########################
-	thecakeisalie=$(echo -e "$(getColor 'portal_orange')${bold}The cake is a lie"); out_array=( "${out_array[@]}" "$thecakeisalie" ); ((display_index++));
+	if [[ "${myascii}" == "The Cake" ]] || [[ "${myascii}" == "Cake" ]] ; then thecakeisalie=$(echo -e "$(getColor 'portal orange')${bold}The cake is a lie"); out_array=( "${out_array[@]}" "$thecakeisalie" ); ((display_index++)); fi
+	
 	if [[ "${distro}" == "Android" ]]; then
 		myhostname=$(echo -e "${labelcolor} ${hostname}"); out_array=( "${out_array[@]}" "$myhostname" )
 		mydistro=$(echo -e "$labelcolor OS:$textcolor $distro $distro_ver"); out_array=( "${out_array[@]}" "$mydistro" )
